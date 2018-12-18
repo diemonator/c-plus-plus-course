@@ -1,0 +1,35 @@
+PROJECT_NAME=Car
+
+CFLAGS=-Wall -Werror -ggdb -O0 -Iproduct
+
+SHARED_SOURCES=product/$(PROJECT_NAME).cpp \
+				product/Wheel.cpp \
+				product/Truck.cpp \
+
+MAIN_SOURCES=$(SHARED_SOURCES)
+
+TEST_SOURCES=test/$(PROJECT_NAME)Test.cpp \
+			test/WheelTest.cpp \
+			test/TruckTest.cpp \
+             $(SHARED_SOURCES)
+
+TEST_LIBS=-lgtest -lgtest_main -lpthread
+
+GCC=g++
+
+all: $(PROJECT_NAME)
+
+$(PROJECT_NAME): $(MAIN_SOURCES) Makefile product/*.h
+	@$(GCC) $(CFLAGS) $(MAIN_SOURCES) -o $@
+
+$(PROJECT_NAME)Test: $(TEST_SOURCES) Makefile product/*.h
+	@$(GCC) $(CFLAGS) $(TEST_SOURCES) -o $@ $(TEST_LIBS) -Itest
+
+clean:
+	@rm -rf $(PROJECT_NAME)Test $(PROJECT_NAME)
+
+test: $(PROJECT_NAME)Test
+	@./$(PROJECT_NAME)Test
+
+valgrind:
+	@valgrind ./$(PROJECT_NAME)Test
