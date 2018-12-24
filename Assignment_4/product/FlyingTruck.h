@@ -8,10 +8,13 @@
 using namespace std;
 
 
-class FlyingTruck : public Airplain, public Truck
+class FlyingTruck : public Truck, public Airplain
 {
 	public:
-		FlyingTruck();
+		FlyingTruck(const string& model, const string& material, int power, int nrOfEngines);
 		virtual ~FlyingTruck();
+		void currentState() override;
+		bool getDrivingBoolean() override;
+		bool getFlyingBoolean() override;
 };
 #endif

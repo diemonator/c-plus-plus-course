@@ -3,20 +3,28 @@
 Truck::Truck(const string& model, const string& material, int power) : model(model),material(material)
 {
 	this->power = new int(power);
+	isDriving = false;
 }
 
 Truck::~Truck()
 {
 	delete power;
 }
-// OK
+
 int Truck::getPower()
 {
 	return *power;
 }
-// OK
-Truck& Truck::operator=(const Truck& myTruck)
-{
-	if (&myTruck == this) 
-    return *this;
+
+void Truck::drive() {
+	isDriving = true;
+}
+
+void Truck::stop() {
+	isDriving = false;
+}
+
+void Truck::currentState() {
+	if (isDriving) cout << "Truck is driving" << endl;
+	else cout << "Truck is in one place" << endl;
 }

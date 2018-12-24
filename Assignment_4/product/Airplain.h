@@ -2,23 +2,22 @@
 #define AIRPLAIN_H_
 
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Airplain
 {
 	private:
-		bool isFlying;
 		int nrOfEngines;
-	
+	protected:
+		bool isFlying;
     public:
 		Airplain(int nrOfEngines);
-
 		virtual ~Airplain();
-
-		void FlysOff();
-
-		void Land();
-
+		void flysOff();
+		void land();
 		int getNrOfEngines() const;
+		virtual void currentState();
+		virtual bool getFlyingBoolean() = 0;
 };
 #endif

@@ -1,17 +1,19 @@
 #include "Airplain.h"
 
-Airplain::Airplain(int nrOfEngines) : isFlying(false), nrOfEngines(1)
-{ }
+Airplain::Airplain(int nrOfEngines) : nrOfEngines(1), isFlying(false)
+{ 
+    this->nrOfEngines = nrOfEngines;
+}
 
 Airplain::~Airplain()
 { }
 
-void Airplain::FlysOff()
+void Airplain::flysOff()
 {
     isFlying = true;
 }
 
-void Airplain::Land()
+void Airplain::land()
 {
     isFlying = false;    
 }
@@ -19,4 +21,9 @@ void Airplain::Land()
 int Airplain::getNrOfEngines() const
 {
     return nrOfEngines;
+}
+
+void Airplain::currentState() {
+    if (isFlying) cout << "Plane is flying" << endl;
+    else cout << "Plane has landed" << endl;
 }
